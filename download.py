@@ -1,13 +1,15 @@
 # In this file, we define download_model
 # It runs during container build time to get model weights built into the container
 
-# In this example: Whisper Large-V2 model and English Wav2Vec2 LRG Alignment model
+# In this example: Whisper Large-V2 model, English Wav2Vec2 LRG Alignment model, Pretrained VAD and Speaker Embedding Models
 
 import hashlib
 import io
 import os
 import urllib
 import torchaudio
+from nemo.collections.asr.models.classification_models import EncDecClassificationModel
+from nemo.collections.asr.models.label_models import EncDecSpeakerLabelModel
 
 _MODELS = {
     "tiny.en": "https://openaipublic.azureedge.net/main/whisper/models/d3dd57d32accea0b295c96e26691aa14d8822fac7d9d27d5dc00b4ca2826dd03/tiny.en.pt",
@@ -28,6 +30,8 @@ download_root = os.getenv(
         os.path.join(os.path.expanduser("~"), ".cache", "whisper")
 whisper_model_name = 'large'
 align_model_name = 'WAV2VEC2_ASR_LARGE_LV60K_960H'
+pretrained_vad = 'vad_multilingual_marblenet'
+pretrained_speaker_model = 'titanet_large'
     
     
 def _download(url: str, root: str):
@@ -60,10 +64,10 @@ def _download(url: str, root: str):
 
     
 def download_model():
-    _download(_MODELS[whisper_model_name], download_root)
-    import torchaudio
-    bundle = torchaudio.pipelines.__dict__[model_name]
-    align_model = bundle.get_model()
+    _download(_MODELS[whisper_model_name], download_root) #whisper
+    torchaudio.pipelines.__dict__[align_model_name].get_model() #wav2vec2
+    EncDecClassificationModel.from_pretrained(model_name=pretrained_vad) #NeMo VAD
+    EncDecSpeakerLabelModel.from_pretrained(model_name=pretrained_speaker_model) #NeMo Embedding
     
     
 if __name__ == "__main__":
