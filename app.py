@@ -5,7 +5,8 @@ import os
 import wget
 import json
 from omegaconf import OmegaConf
-import audiofile
+import librosa
+import soundfile
 
 # Init is ran on server startup
 # Load your model to GPU as a global variable here using the variable name "model"
@@ -91,7 +92,8 @@ def inference(model_inputs:dict) -> dict:
                 break
             output.write(buffer)
     
-    audiofile.convert_to_wav(AUDIO_PATH, 'stereo_file.wav')
+    signal, sample_rate = librosa.load(AUDIO_PATH, sr=None)
+    soundfile.write('stereo_file.wav', signal, sample_rate, 'PCM_24')
     
     # Run the model
     
