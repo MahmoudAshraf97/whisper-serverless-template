@@ -18,7 +18,7 @@ def init():
     # Large models result in considerably better and more aligned (words, timestamps) mapping. 
     language = 'en'
     options = {'language' : language, 'prompt': "- Hey how are you doing? - I'm doing good. How are you?", 'suppress_tokens' : []}
-    whisper_model = load_model("large-v2")
+    whisper_model = load_model("medium.en")
     alignment_model, metadata = whisperx.load_align_model(language_code='en',
                                                       device=device,
                                                       model_name = 'WAV2VEC2_ASR_LARGE_LV60K_960H')
@@ -93,7 +93,7 @@ def inference(model_inputs:dict) -> dict:
                 break
             output.write(buffer)
     
-    signal, sample_rate = librosa.load(AUDIO_PATH, sr=None)
+    signal, sample_rate = librosa.load(download_target, sr=None)
     soundfile.write('stereo_file.wav', signal, sample_rate, 'PCM_24')
     
     # Run the model
