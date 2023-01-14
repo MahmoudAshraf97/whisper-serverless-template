@@ -4,7 +4,7 @@ FROM pytorch/pytorch:1.13.1-cuda11.6-cudnn8-runtime
 WORKDIR /
 
 # Install git
-RUN apt-get update && apt-get install -y git sox libsndfile1 ffmpeg
+RUN apt-get update && apt-get install -y gcc git sox libsndfile1 ffmpeg
 
 # Install python packages
 RUN pip3 install --upgrade pip
