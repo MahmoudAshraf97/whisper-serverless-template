@@ -1,7 +1,7 @@
 # In this file, we define download_model
 # It runs during container build time to get model weights built into the container
 
-# In this example: Whisper Large-V2 model, English Wav2Vec2 LRG Alignment model, Pretrained VAD and Speaker Embedding Models
+# In this example: Whisper Medium.EN model, English Wav2Vec2 LRG Alignment model, Pretrained VAD and Speaker Embedding Models
 
 import hashlib
 import io
@@ -27,8 +27,8 @@ _MODELS = {
 
 download_root = os.getenv(
         "XDG_CACHE_HOME", 
-        os.path.join(os.path.expanduser("~"), ".cache", "whisper")
-whisper_model_name = 'large'
+        os.path.join(os.path.expanduser("~"), ".cache", "whisper"))
+whisper_model_name = 'medium.en'
 align_model_name = 'WAV2VEC2_ASR_LARGE_LV60K_960H'
 pretrained_vad = 'vad_multilingual_marblenet'
 pretrained_speaker_model = 'titanet_large'
