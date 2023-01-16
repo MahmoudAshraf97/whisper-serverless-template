@@ -5,3 +5,4 @@ text-unidecode
 git+https://github.com/NVIDIA/NeMo.git@r1.13.0#egg=nemo_toolkit[asr]
 git+https://github.com/openai/whisper.git
 git+https://github.com/m-bain/whisperX.git
+torchaudio==0.14.0
