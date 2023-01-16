@@ -78,7 +78,7 @@ def init():
 # Reference your preloaded global model variable here.
 def inference(model_inputs:dict) -> dict:
     global whisper_model, options, alignment_model, metadata, config, asr_diar_offline
-
+    device = 'cuda' if torch.cuda.is_available() else -1
     # Parse out your arguments
     url = model_inputs.get('link', None)
     if url == None:
