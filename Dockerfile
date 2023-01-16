@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y gcc build-essential git sox libsndfile1
 # Install python packages
 RUN pip3 install --upgrade pip
 ADD requirements.txt requirements.txt
+RUN pip3 install cython
 RUN pip3 install -r requirements.txt
 
 # We add the banana boilerplate here
