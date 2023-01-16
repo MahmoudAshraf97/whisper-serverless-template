@@ -72,8 +72,8 @@ def init():
     config.diarizer.vad.parameters.pad_offset = -0.05
     config.diarizer.msdd_model.model_path = 'diar_msdd_telephonic' # Telephonic speaker diarization model 
 
-    from nemo.collections.asr.parts.utils.diarization_utils import ASR_DIAR_OFFLINE
-    asr_diar_offline = ASR_DIAR_OFFLINE(**config.diarizer)
+    from nemo.collections.asr.parts.utils.diarization_utils import OfflineDiarWithASR
+    asr_diar_offline = ASR_DIAR_OFFLINE(config.diarizer)
 # Inference is ran for every server call
 # Reference your preloaded global model variable here.
 def inference(model_inputs:dict) -> dict:
