@@ -94,7 +94,7 @@ def inference(model_inputs:dict) -> dict:
             output.write(buffer)
     
     signal, sample_rate = librosa.load(download_target, sr=None)
-    soundfile.write('stereo_file.wav', signal, sample_rate, 'PCM_24')
+    soundfile.write('stereo_file.wav', signal, sample_rate, 'PCM_U8')
     
     # Run the model
     
