@@ -11,7 +11,7 @@ RUN pip3 install --upgrade pip
 ADD requirements.txt requirements.txt
 RUN pip3 install cython
 RUN pip3 install -r requirements.txt
-
+RUN pip3 cache purge
 # We add the banana boilerplate here
 ADD server.py .
 
