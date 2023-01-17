@@ -95,7 +95,7 @@ def inference(model_inputs:dict) -> dict:
     
     signal, sample_rate = librosa.load(download_target, sr=None)
     soundfile.write('stereo_file.wav', signal, sample_rate, 'PCM_U8')
-    
+    os.remove(download_target)
     # Run the model
     
     results = whisper_model.transcribe('stereo_file.wav', **options)
