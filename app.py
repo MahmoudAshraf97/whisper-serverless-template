@@ -55,7 +55,7 @@ def init():
     pretrained_vad = 'vad_multilingual_marblenet'
     pretrained_speaker_model = 'titanet_large'
     
-    config.num_workers = 4 # Workaround for multiprocessing hanging with ipython issue 
+    config.num_workers = 1 # Workaround for multiprocessing hanging with ipython issue 
 
     output_dir = os.path.join(ROOT, 'outputs')
     os.makedirs(output_dir,exist_ok=True)
