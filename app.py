@@ -1,6 +1,7 @@
 from whisper import load_model
 import whisperx
 import torch
+torch.set_num_threads(1)
 import os
 import wget
 import json
