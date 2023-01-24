@@ -108,7 +108,8 @@ def inference(model_inputs:dict) -> dict:
         whisper_word_hyp['stereo_file'].append(segment['text'])
         whisper_word_ts_hyp['stereo_file'].append([segment['start'],segment['end']])
         
-        
+    del whisper_model, alignment_model
+    torch.cuda.empty_cache()
     diar_hyp, diar_score = asr_diar_offline.run_diarization(config, whisper_word_ts_hyp)
 
     result = asr_diar_offline.get_transcript_with_speaker_labels(diar_hyp, whisper_word_hyp, whisper_word_ts_hyp)
